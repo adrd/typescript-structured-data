@@ -1,24 +1,23 @@
-# Optional Properties
+# Dynamic Object Keys
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/optional-properties" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/dynamic-keys" />
 
-👨‍💼 Not every user fills out all their profile fields. We need to handle
-optional data gracefully.
+👨‍💼 We need to model error pages where the property name isn't a valid
+identifier (like `status-404`).
 
-Use `?` to mark a property as optional:
+When the property name is stored in a variable, you can use a computed property
+name in an object literal:
 
 ```ts
-type UserProfile = { name: string; bio?: string }
-const user: UserProfile = {
-	name: 'Alice',
-	// bio is optional, so we can omit it
+const key = 'status-404'
+const errorPages = {
+	[key]: '/not-found',
 }
 ```
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Create a `UserProfile` type alias with required and optional properties
-2. Create users with and without the optional properties
-3. Safely access optional properties (check before using!)
+1. Use computed property names in an object literal
+2. Set values alongside those computed keys
 
-📜 [TypeScript Handbook - Optional Properties](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties)
+📜 [MDN - Computed property names](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#computed_property_names)
