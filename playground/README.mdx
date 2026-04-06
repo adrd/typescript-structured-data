@@ -1,47 +1,69 @@
-# Object Spread
+# Rest Parameters
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/3-spread-and-rest/object-spread" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/3-spread-and-rest/rest-parameters" />
 
-👨‍💼 Object spread is how we update objects without mutation. This is critical
-for React state updates where mutation doesn't trigger re-renders.
-
-```ts
-// Create a new object with updated values
-const original = { name: 'Alice', age: 30 }
-const updated = { ...original, age: 31 }
-// updated = { name: 'Alice', age: 31 }
-// original is unchanged!
-```
-
-## Order Matters
-
-Later properties override earlier ones:
+👨‍💼 Rest parameters let functions accept any number of arguments, collected into
+an array. This is the opposite of spread—instead of expanding, we're collecting.
 
 ```ts
-const defaults = { theme: 'light', fontSize: 14 }
-const userPrefs = { fontSize: 18 }
-const settings = { ...defaults, ...userPrefs }
-// { theme: 'light', fontSize: 18 }
-```
-
-## Nested Objects
-
-Spread is shallow—nested objects need explicit spreading:
-
-```ts
-const user = { name: 'Alice', address: { city: 'NYC' } }
-const updated = {
-	...user,
-	address: { ...user.address, city: 'LA' },
+function sum(...numbers: Array<number>): number {
+	return numbers.reduce((a, b) => a + b, 0)
 }
+
+sum(1, 2) // 3
+sum(1, 2, 3, 4, 5) // 15
+```
+
+<callout-info>
+	The `.reduce()` method shown above is covered later in Exercise 6. For now,
+	you can use a simple `for` loop instead:
+
+```ts
+function sum(...numbers: Array<number>): number {
+	let total = 0
+	for (const n of numbers) {
+		total += n
+	}
+	return total
+}
+```
+
+</callout-info>
+
+## Rest vs Spread
+
+The `...` syntax means different things in different contexts:
+
+```ts
+// SPREAD - expanding into individual elements
+const arr = [1, 2, 3]
+console.log(...arr) // 1 2 3 (expanded)
+
+// REST - collecting into an array
+function fn(...args: Array<number>) {
+	// args is an array of all passed numbers
+}
+```
+
+## Combining with Regular Parameters
+
+Rest must be the last parameter:
+
+```ts
+function greetAll(greeting: string, ...names: Array<string>): string {
+	return names.map((name) => `${greeting}, ${name}!`).join(' ')
+}
+
+greetAll('Hello', 'Alice', 'Bob', 'Charlie')
+// "Hello, Alice! Hello, Bob! Hello, Charlie!"
 ```
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Use object spread to create an updated user object
-2. Merge two configuration objects with spread
-3. Update a nested object immutably
+1. Create a function using rest parameters to accept variable arguments
+2. Create a function with both regular and rest parameters
+3. Use rest in combination with spread to transform arguments
 
-Spread syntax lets you create new objects from existing ones.
+💰 Rest parameters collect remaining arguments into an array.
 
-📜 [MDN - Spread Syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+📜 [MDN - Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)

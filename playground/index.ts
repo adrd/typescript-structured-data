@@ -1,75 +1,86 @@
-// Object Spread
-// Creating new objects with updated values immutably
+// Rest Parameters
+// Functions that accept variable numbers of arguments
 
-type User = {
-	id: string
-	name: string
-	email: string
-	settings: {
-		theme: 'light' | 'dark'
-		notifications: boolean
+// 🐨 Create a function `multiply` that:
+// - Uses rest parameters to accept any number of numbers
+// - Returns the product of all numbers (multiply them together)
+// - Returns 1 if no arguments are provided
+function multiply(...numbers: Array<number>): number {
+	let product = 1
+
+	for (const number of numbers) {
+		product = product * number
 	}
+
+	return product
 }
 
-const user: User = {
-	id: 'u1',
-	name: 'Alice',
-	email: 'alice@example.com',
-	settings: {
-		theme: 'light',
-		notifications: true,
-	},
-}
+// or
 
-// 🐨 Create `updatedUser` - same as user but with email changed to 'alice.new@example.com'
-// 💰 Spread syntax creates a new object
-const updatedUser: User = {
-	...user,
-	email: 'alice.new@example.com'
-}
+// function multiply(...numbers: Array<number>): number {
+// 	if (numbers.length === 0) 
+// 		return 1
 
-type Config = {
-	apiUrl: string
-	timeout: number
-	retries: number
-}
+// 	return numbers.reduce((a, b) => a * b, 1)
+// }
 
-const defaultConfig: Config = {
-	apiUrl: 'https://api.example.com',
-	timeout: 5000,
-	retries: 3,
-}
+// 🐨 Create a function `logWithPrefix` that:
+// - Takes a prefix string as the first parameter
+// - Uses rest for remaining messages
+// - Logs each message with the prefix
+function logWithPrefix(prefix: string, ...messages: Array<string>): void {
 
-// userConfig only overrides some properties
-const userConfig: { timeout: number } = {
-	timeout: 10000,
-}
-
-// 🐨 Merge defaultConfig and userConfig into `finalConfig` (user overrides defaults)
-// 💰 The order of spread operations matters
-const finalConfig: Config = {
-	...defaultConfig,
-	...userConfig
-}
-
-// 🐨 Create `userWithDarkMode` - same as user but with settings.theme changed to 'dark'
-// Remember: spread is shallow, so you need to spread the nested settings object too!
-// 💰 Nested objects require special handling
-const userWithDarkMode: User = {
-	...user,
-	settings: {
-		...user.settings,
-		theme: 'dark'
+	for (const message of messages) {
+		console.log(`${prefix} ${message}`)
 	}
+
 }
 
+// 🐨 Create a function `sum` that:
+// - Uses rest parameters to collect numbers
+// - Returns the sum of all numbers
+// - Returns 0 if no arguments are provided
+function sum(...numbers: Array<number>): number {
+	let total = 0
+
+	if (numbers.length === 0)
+		return total
+
+	for (const number of numbers) {
+		total += number
+	}
+
+	return total
+}
+
+// or
+
+// function sum(...numbers: Array<number>): number {
+// 	return numbers.reduce((a, b) => a + b, 0)
+// }
+
+// 🐨 Create a function `mergeArrays` that:
+// - Takes rest parameters of number arrays
+// - Returns a single merged array using spread inside
+function mergeArrays(...arrays: Array<Array<number>>): Array<number> {
+	
+	const result: Array<number> = []
+	
+	for (const array of arrays) {
+		result.push(...array)
+	}
+
+	return result
+
+}
 
 // Test - uncomment when ready
-console.log(updatedUser.email) // 'alice.new@example.com'
-console.log(user.email) // 'alice@example.com' (unchanged!)
-console.log(finalConfig.timeout) // 10000
-console.log(userWithDarkMode.settings.theme) // 'dark'
-console.log(user.settings.theme) // 'light' (unchanged!)
+console.log(multiply(2, 3, 4)) // 24
+console.log(multiply(5)) // 5
+console.log(multiply()) // 1
+logWithPrefix('[INFO]', 'Starting', 'Processing', 'Done')
+console.log(sum(1, 2, 3, 4)) // 10
+console.log(mergeArrays([1, 2], [3, 4], [5])) // [1, 2, 3, 4, 5]
 
-// 🐨 Export your variables so we can verify your work
-export { updatedUser, user, finalConfig, userWithDarkMode }
+// 🐨 Export your functions so we can verify your work
+export { multiply, sum, mergeArrays }

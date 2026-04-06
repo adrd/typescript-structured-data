@@ -2,85 +2,70 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('updatedUser is exported', () => {
+await test('multiply is exported', () => {
 	assert.ok(
-		'updatedUser' in solution,
-		'🚨 Make sure you export "updatedUser" - add: export { updatedUser, ... }',
+		'multiply' in solution,
+		'🚨 Make sure you export "multiply" - add: export { multiply, ... }',
 	)
 })
 
-await test('user is exported', () => {
+await test('sum is exported', () => {
 	assert.ok(
-		'user' in solution,
-		'🚨 Make sure you export "user" - add: export { user, ... }',
+		'sum' in solution,
+		'🚨 Make sure you export "sum" - add: export { sum, ... }',
 	)
 })
 
-await test('finalConfig is exported', () => {
+await test('mergeArrays is exported', () => {
 	assert.ok(
-		'finalConfig' in solution,
-		'🚨 Make sure you export "finalConfig" - add: export { finalConfig, ... }',
+		'mergeArrays' in solution,
+		'🚨 Make sure you export "mergeArrays" - add: export { mergeArrays, ... }',
 	)
 })
 
-await test('userWithDarkMode is exported', () => {
-	assert.ok(
-		'userWithDarkMode' in solution,
-		'🚨 Make sure you export "userWithDarkMode" - add: export { userWithDarkMode, ... }',
+await test('multiply should use rest parameters', () => {
+	assert.strictEqual(
+		solution.multiply(2, 3, 4),
+		24,
+		'🚨 multiply(2, 3, 4) should return 24',
+	)
+	assert.strictEqual(solution.multiply(5), 5, '🚨 multiply(5) should return 5')
+	assert.strictEqual(
+		solution.multiply(),
+		1,
+		'🚨 multiply() with no args should return 1',
+	)
+	assert.strictEqual(
+		solution.multiply(2, 2, 2, 2),
+		16,
+		'🚨 multiply(2, 2, 2, 2) should return 16',
 	)
 })
 
-await test('updatedUser should have new email', () => {
+await test('sum should add all numbers', () => {
 	assert.strictEqual(
-		solution.updatedUser.email,
-		'alice.new@example.com',
-		'🚨 updatedUser.email should be "alice.new@example.com"',
+		solution.sum(1, 2, 3, 4),
+		10,
+		'🚨 sum(1, 2, 3, 4) should return 10',
 	)
+	assert.strictEqual(solution.sum(5), 5, '🚨 sum(5) should return 5')
+	assert.strictEqual(solution.sum(), 0, '🚨 sum() with no args should return 0')
 })
 
-await test('original user should be unchanged', () => {
-	assert.strictEqual(
-		solution.user.email,
-		'alice@example.com',
-		'🚨 original user.email should still be "alice@example.com" - spread creates a new object',
+await test('mergeArrays should merge multiple arrays', () => {
+	assert.deepStrictEqual(
+		solution.mergeArrays([1, 2], [3, 4], [5]),
+		[1, 2, 3, 4, 5],
+		'🚨 mergeArrays([1, 2], [3, 4], [5]) should return [1, 2, 3, 4, 5]',
 	)
-})
-
-await test('finalConfig should merge with user overriding defaults', () => {
-	assert.strictEqual(
-		solution.finalConfig.apiUrl,
-		'https://api.example.com',
-		'🚨 finalConfig.apiUrl should come from defaults',
+	assert.deepStrictEqual(
+		solution.mergeArrays([10], [20, 30]),
+		[10, 20, 30],
+		'🚨 mergeArrays([10], [20, 30]) should return [10, 20, 30]',
 	)
-	assert.strictEqual(
-		solution.finalConfig.timeout,
-		10000,
-		'🚨 finalConfig.timeout should be 10000 from userConfig (user overrides defaults)',
-	)
-	assert.strictEqual(
-		solution.finalConfig.retries,
-		3,
-		'🚨 finalConfig.retries should come from defaults',
-	)
-})
-
-await test('userWithDarkMode should have updated nested settings', () => {
-	assert.strictEqual(
-		solution.userWithDarkMode.settings.theme,
-		'dark',
-		'🚨 userWithDarkMode.settings.theme should be "dark"',
-	)
-	assert.strictEqual(
-		solution.userWithDarkMode.settings.notifications,
-		true,
-		'🚨 notifications should still be true (unchanged)',
-	)
-})
-
-await test('original user settings should be unchanged', () => {
-	assert.strictEqual(
-		solution.user.settings.theme,
-		'light',
-		'🚨 original user.settings.theme should still be "light" - use nested spread',
+	assert.deepStrictEqual(
+		solution.mergeArrays(),
+		[],
+		'🚨 mergeArrays() should return []',
 	)
 })
