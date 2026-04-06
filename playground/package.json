@@ -1,5 +1,5 @@
 {
-  "name": "exercises_01.objects_05.problem.dynamic-keys",
+  "name": "exercises_02.arrays_01.problem.array-basics",
   "type": "module",
   "scripts": {
     "start": "npx @kentcdodds/log-module@latest ./index.ts",

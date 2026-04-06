@@ -1,18 +1,24 @@
-// Error Pages
-// Computed property names in object literals
+// Inventory System
+// Working with basic arrays
 
-const notFoundKey = '404-status'
-const serverErrorKey = '500-status'
+// 🐨 Create an array of product names
+const products: Array<string> = ["Laptop", "Mouse", "Keyboard"]
 
-const notFoundPath = '/not-found'
-const serverErrorPath = '/server-error'
+// 🐨 Add a new product 'Monitor' using push
+products.push('Monitor')
 
-// 🐨 Create an `errorPages` object literal that uses computed property names
-// for the keys above and assigns the matching paths as values
-const errorPages = {
-	[notFoundKey]: notFoundPath,
-	[serverErrorKey]: serverErrorPath
-}
+// 🐨 Log the first product (index 0)
+console.log(products[0])
+console.log(`First product = ${products.at(0)}`)
 
-// 🐨 Export your variables so we can verify your work
-export { errorPages }
+// 🐨 Log the last product (hint: use length - 1)
+console.log(products[products.length - 1])
+console.log(`Last product = ${products.at(-1)}`)
+
+// 🐨 Log the total number of products
+console.log(`Total products = ${products.length}`)
+
+console.log('Products:', products)
+
+// 🐨 Export your variable so we can verify your work
+export { products }
