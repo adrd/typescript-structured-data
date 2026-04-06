@@ -1,39 +1,49 @@
-// Product Inventory
-// Arrays of objects
+// Inventory Analysis
+// Iterating and filtering arrays
 
-// 🐨 Create a `Product` type alias with:
-// - name: string
-// - price: number
-// - inStock: boolean
 type Product = {
-	name: string,
-	price: number,
+	name: string
+	price: number
 	inStock: boolean
 }
 
-// 🐨 Create a `products` array with `Product` objects
-// Start with 2-3 products
 const products: Array<Product> = [
-	{ name: "Laptop", price: 20.99, inStock: true},
-	{ name: "Mouse", price: 10.99, inStock: true},
-	{ name: "Keyboard", price: 1.99, inStock: false}
+	{ name: 'Laptop', price: 999.99, inStock: true },
+	{ name: 'Mouse', price: 29.99, inStock: true },
+	{ name: 'Keyboard', price: 79.99, inStock: false },
+	{ name: 'Monitor', price: 299.99, inStock: true },
+	{ name: 'Webcam', price: 49.99, inStock: false },
 ]
 
-// 🐨 Add a new product using push
-products.push({name: "Monitor", price: 30.99, inStock: true })
-
-// 🐨 Log the name of the first product from the array
-console.log(`First product = ${products[0].name}`)
-console.log(`Last product = ${products[products.length - 1].name}`)
-
-// 🐨 Calculate the total value of all products (sum of prices)
-// 💰 You'll need to iterate through the array
-let totalValue = 0
+// 🐨 Use for...of to log each product's name and price
+console.log('All products:')
 for (const product of products) {
-	totalValue += product.price
+	console.log(`${product.name} - ${product.price}`)
 }
 
-console.log(`Total inventory value: $${totalValue.toFixed(2)}`)
+// 🐨 Create an array of products that are in stock
+// const inStockProducts: Array<Product> = []
+// for (const product of products) {
+// 	if (product.inStock) {
+// 		inStockProducts.push(product)
+// 	}
+// }
+
+const inStockProducts: Array<Product> = products.filter(p => p.inStock === true)
+
+// 🐨 Count how many products cost more than $50
+let expensiveCount: number = 0
+for (const product of products) {
+	if (product.price > 50) {
+		expensiveCount++
+	}
+}
+
+// Again, this works, but filter().length is more expressive
+// const expensiveCount = products.filter(p => p.price > 50).length
+
+console.log('In stock:', inStockProducts.length)
+console.log('Expensive products:', expensiveCount)
 
 // 🐨 Export your variables so we can verify your work
-export { products, totalValue }
+export { products, inStockProducts, expensiveCount }

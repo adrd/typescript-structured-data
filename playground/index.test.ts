@@ -9,53 +9,55 @@ await test('products is exported', () => {
 	)
 })
 
-await test('totalValue is exported', () => {
+await test('inStockProducts is exported', () => {
 	assert.ok(
-		'totalValue' in solution,
-		'🚨 Make sure you export "totalValue" - add: export { totalValue, ... }',
+		'inStockProducts' in solution,
+		'🚨 Make sure you export "inStockProducts" - add: export { inStockProducts, ... }',
 	)
 })
 
-await test('Products array should have correct typed structure', () => {
+await test('expensiveCount is exported', () => {
+	assert.ok(
+		'expensiveCount' in solution,
+		'🚨 Make sure you export "expensiveCount" - add: export { expensiveCount, ... }',
+	)
+})
+
+await test('Products array should have correct structure', () => {
+	assert.strictEqual(
+		solution.products.length,
+		5,
+		'🚨 products.length should be 5 - verify you have five product objects in the array',
+	)
 	assert.strictEqual(
 		solution.products[0].name,
 		'Laptop',
-		'🚨 products[0].name should be "Laptop" - access nested properties using dot notation after array indexing',
+		'🚨 products[0].name should be "Laptop" - access the name property of the first product',
 	)
 	assert.strictEqual(
-		solution.products[0].price,
-		999.99,
-		'🚨 products[0].price should be 999.99 - access the price property of the first product object',
+		solution.products[4].name,
+		'Webcam',
+		'🚨 products[4].name should be "Webcam" - access the name property of the last product (index 4)',
+	)
+})
+
+await test('In-stock products filtering should work', () => {
+	assert.strictEqual(
+		solution.inStockProducts.length,
+		3,
+		'🚨 inStockProducts.length should be 3 - filter products where inStock is true (Laptop, Mouse, Monitor)',
 	)
 	assert.strictEqual(
-		solution.products[0].inStock,
+		solution.inStockProducts.every((p: { inStock: boolean }) => p.inStock),
 		true,
-		'🚨 products[0].inStock should be true - access the inStock property of the first product object',
-	)
-	assert.strictEqual(
-		solution.products.length,
-		4,
-		'🚨 products.length should be 4 - check that you have three starting products then push a fourth',
+		'🚨 All inStockProducts should have inStock === true - verify your filter condition checks inStock property',
 	)
 })
 
-await test('Adding to arrays with push increases length', () => {
+await test('Expensive products count should work', () => {
 	assert.strictEqual(
-		solution.products.length,
-		4,
-		'🚨 products.length should be 4 - push adds one item to the array',
-	)
-	assert.strictEqual(
-		solution.products[3].name,
-		'Monitor',
-		'🚨 products[3].name should be "Monitor" - the new item is at the end of the array',
-	)
-})
-
-await test('Total inventory value calculation with a loop', () => {
-	assert.strictEqual(
-		solution.totalValue,
-		1409.96,
-		'🚨 totalValue should be 1409.96 - use a loop to sum all product prices (999.99 + 29.99 + 79.99 + 299.99)',
+		solution.expensiveCount,
+		3,
+		'🚨 expensiveCount should be 3 - count products where price > 50 (Laptop, Keyboard, Monitor)',
 	)
 })

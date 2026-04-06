@@ -1,33 +1,16 @@
-# Array Types
+# Array Iteration
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/2-arrays/array-types" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/2-arrays/iteration" />
 
-👨‍💼 Let's work with arrays of objects—a very common pattern in real
-applications.
-
-```ts
-type User = { name: string; age: number }
-const users: Array<User> = [
-	{ name: 'Alice', age: 30 },
-	{ name: 'Bob', age: 25 },
-]
-```
+👨‍💼 We need to process our inventory data. We'll do this the manual way first
+so you can see the baseline before we introduce array methods later.
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Create a `Product` type alias with `name`, `price`, and `inStock`
-2. Create an array of `Product` objects
-3. Add a new product using `push`
-4. Access a property of a specific product
-5. Calculate the total price using a loop
+1. Use `for...of` to log each product
+2. Find all products that are in stock
+3. Count products over a certain price
 
-💰 Arrays have methods for adding elements.
+`for...of` loops work well with arrays and preserve item types.
 
-💰 You can iterate through arrays to calculate totals.
-
-<callout-info>
-	There's a more concise way to sum arrays with `reduce`, and we'll cover that
-	in the Array Methods exercise later.
-</callout-info>
-
-📜 [TypeScript Handbook - Array Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays)
+📜 [MDN - for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of)

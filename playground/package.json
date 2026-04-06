@@ -1,5 +1,5 @@
 {
-  "name": "exercises_02.arrays_02.problem.array-types",
+  "name": "exercises_02.arrays_03.problem.iteration",
   "type": "module",
   "scripts": {
     "start": "npx @kentcdodds/log-module@latest ./index.ts",
