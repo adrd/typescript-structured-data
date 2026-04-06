@@ -13,7 +13,7 @@ workspace/
 **/playwright-report
 **/test-results
 data.db
-/playground
+# /playground
 **/*.tsbuildinfo
 **/dist
 
