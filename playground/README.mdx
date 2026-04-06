@@ -1,17 +1,33 @@
-# Array Basics
+# Array Types
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/2-arrays/array-basics" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/2-arrays/array-types" />
 
-👨‍💼 We're building an inventory system that tracks products. Let's start with
-basic array operations.
+👨‍💼 Let's work with arrays of objects—a very common pattern in real
+applications.
+
+```ts
+type User = { name: string; age: number }
+const users: Array<User> = [
+	{ name: 'Alice', age: 30 },
+	{ name: 'Bob', age: 25 },
+]
+```
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Create an array of product names (strings)
-2. Add a new product using `push`
-3. Access elements by index
-4. Get the length of the array
+1. Create a `Product` type alias with `name`, `price`, and `inStock`
+2. Create an array of `Product` objects
+3. Add a new product using `push`
+4. Access a property of a specific product
+5. Calculate the total price using a loop
 
-💰 Arrays store ordered values; you can push, index, and read length.
+💰 Arrays have methods for adding elements.
 
-📜 [MDN - Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+💰 You can iterate through arrays to calculate totals.
+
+<callout-info>
+	There's a more concise way to sum arrays with `reduce`, and we'll cover that
+	in the Array Methods exercise later.
+</callout-info>
+
+📜 [TypeScript Handbook - Array Types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays)

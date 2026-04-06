@@ -1,24 +1,39 @@
-// Inventory System
-// Working with basic arrays
+// Product Inventory
+// Arrays of objects
 
-// 🐨 Create an array of product names
-const products: Array<string> = ["Laptop", "Mouse", "Keyboard"]
+// 🐨 Create a `Product` type alias with:
+// - name: string
+// - price: number
+// - inStock: boolean
+type Product = {
+	name: string,
+	price: number,
+	inStock: boolean
+}
 
-// 🐨 Add a new product 'Monitor' using push
-products.push('Monitor')
+// 🐨 Create a `products` array with `Product` objects
+// Start with 2-3 products
+const products: Array<Product> = [
+	{ name: "Laptop", price: 20.99, inStock: true},
+	{ name: "Mouse", price: 10.99, inStock: true},
+	{ name: "Keyboard", price: 1.99, inStock: false}
+]
 
-// 🐨 Log the first product (index 0)
-console.log(products[0])
-console.log(`First product = ${products.at(0)}`)
+// 🐨 Add a new product using push
+products.push({name: "Monitor", price: 30.99, inStock: true })
 
-// 🐨 Log the last product (hint: use length - 1)
-console.log(products[products.length - 1])
-console.log(`Last product = ${products.at(-1)}`)
+// 🐨 Log the name of the first product from the array
+console.log(`First product = ${products[0].name}`)
+console.log(`Last product = ${products[products.length - 1].name}`)
 
-// 🐨 Log the total number of products
-console.log(`Total products = ${products.length}`)
+// 🐨 Calculate the total value of all products (sum of prices)
+// 💰 You'll need to iterate through the array
+let totalValue = 0
+for (const product of products) {
+	totalValue += product.price
+}
 
-console.log('Products:', products)
+console.log(`Total inventory value: $${totalValue.toFixed(2)}`)
 
-// 🐨 Export your variable so we can verify your work
-export { products }
+// 🐨 Export your variables so we can verify your work
+export { products, totalValue }
