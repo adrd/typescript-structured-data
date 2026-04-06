@@ -1,5 +1,5 @@
 {
-  "name": "exercises_02.arrays_03.problem.iteration",
+  "name": "exercises_03.spread-rest_01.problem.object-spread",
   "type": "module",
   "scripts": {
     "start": "npx @kentcdodds/log-module@latest ./index.ts",

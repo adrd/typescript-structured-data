@@ -2,62 +2,85 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('products is exported', () => {
+await test('updatedUser is exported', () => {
 	assert.ok(
-		'products' in solution,
-		'🚨 Make sure you export "products" - add: export { products, ... }',
+		'updatedUser' in solution,
+		'🚨 Make sure you export "updatedUser" - add: export { updatedUser, ... }',
 	)
 })
 
-await test('inStockProducts is exported', () => {
+await test('user is exported', () => {
 	assert.ok(
-		'inStockProducts' in solution,
-		'🚨 Make sure you export "inStockProducts" - add: export { inStockProducts, ... }',
+		'user' in solution,
+		'🚨 Make sure you export "user" - add: export { user, ... }',
 	)
 })
 
-await test('expensiveCount is exported', () => {
+await test('finalConfig is exported', () => {
 	assert.ok(
-		'expensiveCount' in solution,
-		'🚨 Make sure you export "expensiveCount" - add: export { expensiveCount, ... }',
+		'finalConfig' in solution,
+		'🚨 Make sure you export "finalConfig" - add: export { finalConfig, ... }',
 	)
 })
 
-await test('Products array should have correct structure', () => {
-	assert.strictEqual(
-		solution.products.length,
-		5,
-		'🚨 products.length should be 5 - verify you have five product objects in the array',
-	)
-	assert.strictEqual(
-		solution.products[0].name,
-		'Laptop',
-		'🚨 products[0].name should be "Laptop" - access the name property of the first product',
-	)
-	assert.strictEqual(
-		solution.products[4].name,
-		'Webcam',
-		'🚨 products[4].name should be "Webcam" - access the name property of the last product (index 4)',
+await test('userWithDarkMode is exported', () => {
+	assert.ok(
+		'userWithDarkMode' in solution,
+		'🚨 Make sure you export "userWithDarkMode" - add: export { userWithDarkMode, ... }',
 	)
 })
 
-await test('In-stock products filtering should work', () => {
+await test('updatedUser should have new email', () => {
 	assert.strictEqual(
-		solution.inStockProducts.length,
+		solution.updatedUser.email,
+		'alice.new@example.com',
+		'🚨 updatedUser.email should be "alice.new@example.com"',
+	)
+})
+
+await test('original user should be unchanged', () => {
+	assert.strictEqual(
+		solution.user.email,
+		'alice@example.com',
+		'🚨 original user.email should still be "alice@example.com" - spread creates a new object',
+	)
+})
+
+await test('finalConfig should merge with user overriding defaults', () => {
+	assert.strictEqual(
+		solution.finalConfig.apiUrl,
+		'https://api.example.com',
+		'🚨 finalConfig.apiUrl should come from defaults',
+	)
+	assert.strictEqual(
+		solution.finalConfig.timeout,
+		10000,
+		'🚨 finalConfig.timeout should be 10000 from userConfig (user overrides defaults)',
+	)
+	assert.strictEqual(
+		solution.finalConfig.retries,
 		3,
-		'🚨 inStockProducts.length should be 3 - filter products where inStock is true (Laptop, Mouse, Monitor)',
+		'🚨 finalConfig.retries should come from defaults',
+	)
+})
+
+await test('userWithDarkMode should have updated nested settings', () => {
+	assert.strictEqual(
+		solution.userWithDarkMode.settings.theme,
+		'dark',
+		'🚨 userWithDarkMode.settings.theme should be "dark"',
 	)
 	assert.strictEqual(
-		solution.inStockProducts.every((p: { inStock: boolean }) => p.inStock),
+		solution.userWithDarkMode.settings.notifications,
 		true,
-		'🚨 All inStockProducts should have inStock === true - verify your filter condition checks inStock property',
+		'🚨 notifications should still be true (unchanged)',
 	)
 })
 
-await test('Expensive products count should work', () => {
+await test('original user settings should be unchanged', () => {
 	assert.strictEqual(
-		solution.expensiveCount,
-		3,
-		'🚨 expensiveCount should be 3 - count products where price > 50 (Laptop, Keyboard, Monitor)',
+		solution.user.settings.theme,
+		'light',
+		'🚨 original user.settings.theme should still be "light" - use nested spread',
 	)
 })
