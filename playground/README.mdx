@@ -1,22 +1,24 @@
-# Object Literals
+# Property Access
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/object-literals" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/property-access" />
 
-👨‍💼 We're building a user management system. We need to represent user data as
-objects with proper types.
+👨‍💼 We need to read and work with object properties. TypeScript ensures you
+can only access properties that exist on an object.
+
+There are two ways to access properties:
+
+```ts
+// Dot notation - most common
+user.name
+
+// Bracket notation - useful for dynamic keys
+user['name']
+```
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Create a `user` object with `name`, `age`, and `email` properties
-2. Create a second user object using the same structure
+1. Access properties using dot notation
+2. Create a function that takes a product object and returns a formatted string
+3. Try accessing a property that doesn't exist (see the error!)
 
-🦺 Object type syntax (we'll name these types in a later step):
-
-```ts
-const obj: { prop1: Type1; prop2: Type2 } = {
-	prop1: value1,
-	prop2: value2,
-}
-```
-
-📜 [TypeScript Handbook - Object Types](https://www.typescriptlang.org/docs/handbook/2/objects.html)
+📜 [MDN - Property accessors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors)

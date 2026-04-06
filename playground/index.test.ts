@@ -2,52 +2,48 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('user is exported', () => {
+await test('product is exported', () => {
 	assert.ok(
-		'user' in solution,
-		'🚨 Make sure you export "user" - add: export { user, ... }',
+		'product' in solution,
+		'🚨 Make sure you export "product" - add: export { product, ... }',
 	)
 })
 
-await test('User object should have correct properties', () => {
+await test('Product object should have correct properties', () => {
 	assert.strictEqual(
-		solution.user.name,
-		'Alice',
-		'🚨 user.name should be "Alice" - make sure you set the name property correctly',
+		solution.product.name,
+		'TypeScript Handbook',
+		'🚨 product.name should be "TypeScript Handbook" - use dot notation to access the name property',
 	)
 	assert.strictEqual(
-		solution.user.age,
-		30,
-		'🚨 user.age should be 30 - check that you set the age property to the correct number',
+		solution.product['price'],
+		29.99,
+		'🚨 product["price"] should be 29.99 - use bracket notation to access the price property',
 	)
 	assert.strictEqual(
-		solution.user.email,
-		'alice@example.com',
-		'🚨 user.email should be "alice@example.com" - verify the email property is set correctly',
+		solution.product.inStock,
+		true,
+		'🚨 product.inStock should be true - access the inStock property using dot notation',
+	)
+	assert.strictEqual(
+		solution.product.category,
+		'Books',
+		'🚨 product.category should be "Books" - make sure you access the category property correctly',
 	)
 })
 
-await test('admin is exported', () => {
+await test('formatProduct is exported', () => {
 	assert.ok(
-		'admin' in solution,
-		'🚨 Make sure you export "admin" - add: export { user, admin }',
+		'formatProduct' in solution,
+		'🚨 Make sure you export "formatProduct" - add: export { product, formatProduct }',
 	)
 })
 
-await test('Admin object should have correct properties', () => {
+await test('formatProduct should format product correctly', () => {
+	const formatted = solution.formatProduct(solution.product)
 	assert.strictEqual(
-		solution.admin.name,
-		'Bob',
-		'🚨 admin.name should be "Bob" - make sure you set the name property correctly',
-	)
-	assert.strictEqual(
-		solution.admin.age,
-		35,
-		'🚨 admin.age should be 35 - check that you set the age property to the correct number',
-	)
-	assert.strictEqual(
-		solution.admin.email,
-		'bob@example.com',
-		'🚨 admin.email should be "bob@example.com" - verify the email property is set correctly',
+		formatted,
+		'TypeScript Handbook - $29.99',
+		'🚨 formatProduct should return "TypeScript Handbook - $29.99" - check that you access name and price properties correctly in the function',
 	)
 })
