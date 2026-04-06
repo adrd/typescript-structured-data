@@ -1,16 +1,24 @@
-# Object Types
+# Optional Properties
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/object-types" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/optional-properties" />
 
-👨‍💼 We're repeating the same object shape in a few places. Let's give that
-shape a name so we can reuse it.
+👨‍💼 Not every user fills out all their profile fields. We need to handle
+optional data gracefully.
 
-🦺 A **type alias** lets us name an object type. We'll go deeper on type aliases
-in the Type Safety workshop, but this small intro will make later steps easier.
+Use `?` to mark a property as optional:
+
+```ts
+type UserProfile = { name: string; bio?: string }
+const user: UserProfile = {
+	name: 'Alice',
+	// bio is optional, so we can omit it
+}
+```
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Create a `Task` type alias with `id`, `title`, and `completed`
-2. Create two task objects using that type
+1. Create a `UserProfile` type alias with required and optional properties
+2. Create users with and without the optional properties
+3. Safely access optional properties (check before using!)
 
-📜 [TypeScript Handbook - Type Aliases](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
+📜 [TypeScript Handbook - Optional Properties](https://www.typescriptlang.org/docs/handbook/2/objects.html#optional-properties)

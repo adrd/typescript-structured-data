@@ -1,30 +1,50 @@
-// Task Board
-// Naming object types
+// User Profiles
+// Working with optional properties
 
-// 🐨 Create a type called `Task` with:
-// - id: number
-// - title: string
-// - completed: boolean
-type Task = {
-	id: number,
-	title: string,
-	completed: boolean
+// 🐨 Create a type alias called `UserProfile` with:
+// - name: string
+// - email: string
+// - bio?: string
+// - website?: string
+type UserProfile = {
+	name: string,
+	email: string,
+	bio?: string,
+	website?: string
 }
 
-// 🐨 Create a `firstTask` and `secondTask` using the Task type
-// - firstTask: id 1, title "Write tests", completed false
-// - secondTask: id 2, title "Ship release", completed true
-const firstTask: Task = {
-	id: 1,
-	title: "Write tests",
-	completed: false
+// 🐨 type this as a UserProfile
+const alice: UserProfile = {
+	name: 'Alice',
+	email: 'alice@example.com',
 }
 
-const secondTask: Task = {
-	id: 2,
-	title: "Ship release",
-	completed: true
+// 🐨 type this as a UserProfile
+const bob: UserProfile = {
+	name: 'Bob',
+	email: 'bob@example.com',
+	bio: 'Software developer and TypeScript enthusiast',
+	website: 'https://bob.dev',
 }
+
+// 🐨 Create a function that displays user info
+// Handle the optional properties safely
+// 💰 Optional properties may be undefined
+
+function displayUserInfo(user: {
+	name: string
+	email: string
+	bio?: string
+	website?: string
+}): void {
+  console.log(`Name: ${user.name}`)
+  console.log(`Email: ${user.email}`)
+  console.log(`Bio: ${user.bio ?? 'No bio provided'}`)
+  console.log(`Website: ${user.website ?? 'No website provided'}`)
+}
+
+displayUserInfo(alice)
+displayUserInfo(bob)
 
 // 🐨 Export your variables so we can verify your work
-export { firstTask, secondTask }
+export { alice, bob }
