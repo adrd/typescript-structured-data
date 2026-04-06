@@ -1,5 +1,5 @@
 {
-  "name": "exercises_01.objects_01.problem.object-literals",
+  "name": "exercises_01.objects_03.problem.object-types",
   "type": "module",
   "scripts": {
     "start": "npx @kentcdodds/log-module@latest ./index.ts",

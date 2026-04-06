@@ -1,31 +1,30 @@
-// Product Catalog
-// Accessing object properties
+// Task Board
+// Naming object types
 
-const product = {
-	name: 'TypeScript Handbook',
-	price: 29.99,
-	inStock: true,
-	category: 'Books',
+// 🐨 Create a type called `Task` with:
+// - id: number
+// - title: string
+// - completed: boolean
+type Task = {
+	id: number,
+	title: string,
+	completed: boolean
 }
 
-// 🐨 Log the product name using dot notation
-console.log(`${product.name}`)
-
-// 🐨 Log the product price using bracket notation
-console.log(`${product['price']}`)
-
-// 🐨 Create a function `formatProduct` that takes a product object
-// and returns a string like "TypeScript Handbook - $29.99"
-function formatProduct(product: { name: string, price: number, inStock: boolean, category: string }): string {
-    return `${product.name} - $${product.price}`
+// 🐨 Create a `firstTask` and `secondTask` using the Task type
+// - firstTask: id 1, title "Write tests", completed false
+// - secondTask: id 2, title "Ship release", completed true
+const firstTask: Task = {
+	id: 1,
+	title: "Write tests",
+	completed: false
 }
 
-// 🐨 Try uncommenting this line - what error do you see?
-// ❌ This would cause an error:
-// console.log(product.rating)
-// Property 'rating' does not exist on type '{ name: string; ... }'
+const secondTask: Task = {
+	id: 2,
+	title: "Ship release",
+	completed: true
+}
 
-console.log(formatProduct(product))
-
-// 🐨 Export your variables and functions so we can verify your work
-export { product, formatProduct }
+// 🐨 Export your variables so we can verify your work
+export { firstTask, secondTask }

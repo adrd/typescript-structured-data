@@ -1,24 +1,16 @@
-# Property Access
+# Object Types
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/property-access" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/1-objects/object-types" />
 
-👨‍💼 We need to read and work with object properties. TypeScript ensures you
-can only access properties that exist on an object.
+👨‍💼 We're repeating the same object shape in a few places. Let's give that
+shape a name so we can reuse it.
 
-There are two ways to access properties:
-
-```ts
-// Dot notation - most common
-user.name
-
-// Bracket notation - useful for dynamic keys
-user['name']
-```
+🦺 A **type alias** lets us name an object type. We'll go deeper on type aliases
+in the Type Safety workshop, but this small intro will make later steps easier.
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Access properties using dot notation
-2. Create a function that takes a product object and returns a formatted string
-3. Try accessing a property that doesn't exist (see the error!)
+1. Create a `Task` type alias with `id`, `title`, and `completed`
+2. Create two task objects using that type
 
-📜 [MDN - Property accessors](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors)
+📜 [TypeScript Handbook - Type Aliases](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
