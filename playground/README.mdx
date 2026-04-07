@@ -1,44 +1,52 @@
-# Object Destructuring
+# Array Destructuring
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/4-destructuring/object-destructuring" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/4-destructuring/array-destructuring" />
 
-👨‍💼 We're building a user profile system. Instead of accessing properties one by
-one with `user.name`, `user.email`, etc., let's use destructuring for cleaner
-code.
+👨‍💼 Array destructuring extracts elements by position. It's especially useful for
+working with function return values and APIs that return arrays.
 
 ```ts
-// Instead of this:
-const name = user.name
-const email = user.email
-
-// Do this:
-const { name, email } = user
+const colors = ['red', 'green', 'blue']
+const [first, second, third] = colors
+// first = 'red', second = 'green', third = 'blue'
 ```
 
-## Renaming Variables
+## Skipping Elements
 
-Sometimes you need a different variable name:
+Use empty slots to skip elements you don't need:
 
 ```ts
-const { name: userName, email: userEmail } = user
-// userName = user.name, userEmail = user.email
+const [, , third] = colors // third = 'blue'
 ```
 
-## Default Values
+## Rest Pattern
 
-Provide fallbacks for potentially missing properties:
+Collect remaining elements into a new array:
 
 ```ts
-const { nickname = 'Anonymous' } = user
-// Uses 'Anonymous' if user.nickname is undefined
+const [head, ...rest] = [1, 2, 3, 4, 5]
+// head = 1, rest = [2, 3, 4, 5]
+```
+
+<callout-info>
+	The spread/rest syntax was covered in Exercise 3. The `...rest` pattern here
+	collects remaining array elements into a new array.
+</callout-info>
+
+## Swapping Variables
+
+Destructuring enables elegant swaps:
+
+```ts
+let a = 1
+let b = 2
+;[a, b] = [b, a] // a = 2, b = 1
 ```
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Use object destructuring to extract `name` and `email` from a user object
-2. Rename a property while destructuring (e.g., `id` to `userId`)
-3. Provide a default value for an optional property
+1. Destructure the first and second elements from an array
+2. Use the rest pattern to separate the first item from the rest
+3. Create a function that returns multiple values and destructure the result
 
-💰 You can rename fields and provide defaults while destructuring.
-
-📜 [MDN - Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+📜 [MDN - Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring)

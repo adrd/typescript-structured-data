@@ -2,85 +2,117 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('name is exported', () => {
+await test('highest is exported', () => {
 	assert.ok(
-		'name' in solution,
-		'🚨 Make sure you export "name" - add: export { name, ... }',
+		'highest' in solution,
+		'🚨 Make sure you export "highest" - add: export { highest, ... }',
 	)
 })
 
-await test('email is exported', () => {
+await test('secondHighest is exported', () => {
 	assert.ok(
-		'email' in solution,
-		'🚨 Make sure you export "email" - add: export { email, ... }',
+		'secondHighest' in solution,
+		'🚨 Make sure you export "secondHighest" - add: export { secondHighest, ... }',
 	)
 })
 
-await test('userId is exported', () => {
+await test('winner is exported', () => {
 	assert.ok(
-		'userId' in solution,
-		'🚨 Make sure you export "userId" - add: export { userId, ... }',
+		'winner' in solution,
+		'🚨 Make sure you export "winner" - add: export { winner, ... }',
 	)
 })
 
-await test('bio is exported', () => {
+await test('others is exported', () => {
 	assert.ok(
-		'bio' in solution,
-		'🚨 Make sure you export "bio" - add: export { bio, ... }',
+		'others' in solution,
+		'🚨 Make sure you export "others" - add: export { others, ... }',
 	)
 })
 
-await test('formatUserCard is exported', () => {
+await test('x, y, z are exported', () => {
+	assert.ok('x' in solution, '🚨 Make sure you export "x"')
+	assert.ok('y' in solution, '🚨 Make sure you export "y"')
+	assert.ok('z' in solution, '🚨 Make sure you export "z"')
+})
+
+await test('min and max are exported', () => {
+	assert.ok('min' in solution, '🚨 Make sure you export "min"')
+	assert.ok('max' in solution, '🚨 Make sure you export "max"')
+})
+
+await test('getMinMax is exported', () => {
 	assert.ok(
-		'formatUserCard' in solution,
-		'🚨 Make sure you export "formatUserCard" - add: export { formatUserCard, ... }',
+		'getMinMax' in solution,
+		'🚨 Make sure you export "getMinMax" - add: export { getMinMax, ... }',
 	)
 })
 
-await test('name should be destructured from user', () => {
+await test('highest and secondHighest should be destructured', () => {
 	assert.strictEqual(
-		solution.name,
-		'Alice Johnson',
-		'🚨 name should be "Alice Johnson" - use const { name } = user',
+		solution.highest,
+		95,
+		'🚨 highest should be 95 - destructure first element from scores',
 	)
-})
-
-await test('email should be destructured from user', () => {
 	assert.strictEqual(
-		solution.email,
-		'alice@example.com',
-		'🚨 email should be "alice@example.com" - use const { email } = user',
+		solution.secondHighest,
+		92,
+		'🚨 secondHighest should be 92 - destructure second element from scores',
 	)
 })
 
-await test('userId should be renamed from id', () => {
+await test('winner and others should use rest pattern', () => {
 	assert.strictEqual(
-		solution.userId,
-		'u123',
-		'🚨 userId should be "u123" - use const { id: userId } = user',
+		solution.winner,
+		95,
+		'🚨 winner should be 95 - use const [winner, ...others] = scores',
+	)
+	assert.deepStrictEqual(
+		solution.others,
+		[92, 88, 87, 76],
+		'🚨 others should be [92, 88, 87, 76] - use rest pattern',
 	)
 })
 
-await test('bio should have a default value', () => {
+await test('coordinates should be destructured into x, y, z', () => {
 	assert.strictEqual(
-		solution.bio,
-		'No bio provided',
-		'🚨 bio should be "No bio provided" - use const { bio = "No bio provided" } = user',
+		solution.x,
+		10,
+		'🚨 x should be 10 - destructure from coordinates',
+	)
+	assert.strictEqual(
+		solution.y,
+		20,
+		'🚨 y should be 20 - destructure from coordinates',
+	)
+	assert.strictEqual(
+		solution.z,
+		30,
+		'🚨 z should be 30 - destructure from coordinates',
 	)
 })
 
-await test('formatUserCard should use parameter destructuring', () => {
-	const result = solution.formatUserCard({
-		id: 'test',
-		name: 'Bob',
-		email: 'bob@test.com',
-		role: 'user',
-	})
-	assert.ok(
-		typeof result === 'string' &&
-			result.includes('Bob') &&
-			result.includes('user') &&
-			result.includes('bob@test.com'),
-		'🚨 formatUserCard should return a string containing the name, role, and email',
+await test('getMinMax should return tuple and be destructured', () => {
+	assert.strictEqual(
+		solution.min,
+		76,
+		'🚨 min should be 76 - destructure getMinMax result',
+	)
+	assert.strictEqual(
+		solution.max,
+		95,
+		'🚨 max should be 95 - destructure getMinMax result',
+	)
+
+	const [testMin, testMax] = solution.getMinMax([5, 2, 8, 1, 9])
+	assert.strictEqual(
+		testMin,
+		1,
+		'🚨 getMinMax([5,2,8,1,9]) should return min 1',
+	)
+	assert.strictEqual(
+		testMax,
+		9,
+		'🚨 getMinMax([5,2,8,1,9]) should return max 9',
 	)
 })

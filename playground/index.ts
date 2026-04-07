@@ -1,95 +1,47 @@
-// Object Destructuring
-// Extracting values from objects into variables
+// Array Destructuring
+// Extracting values from arrays by position
 
-type User = {
-	id: string
-	name: string
-	email: string
-	role: 'admin' | 'user'
-	bio?: string,
-	address: {
-		street: string,
-		city: string,
-		state: string,
-		zip: string,
-		subAddress: {
-			floor: string,
-			unit: string
-		}
-	}
+const scores = [95, 92, 88, 87, 76]
+
+// 🐨 Destructure the first two scores into `highest` and `secondHighest`
+const [highest, secondHighest] = scores
+
+// 🐨 Use the rest pattern to get the first score as `winner` and remaining as `others`
+const [winner, ...others] = scores
+
+const coordinates: [number, number, number] = [10, 20, 30]
+
+// 🐨 Destructure coordinates into x, y, and z
+const [x, y, z] = coordinates
+
+// 🐨 Create a function `getMinMax` that:
+// - Takes an array of numbers
+// - Returns a tuple [min, max]
+// - Then destructure the result when calling it
+function getMinMax(numbers: Array<number>): [number, number] {
+	const min = Math.min(...numbers)
+	const max = Math.max(...numbers)
+	
+	return [min, max]
 }
-
-const user: User = {
-	id: 'u123',
-	name: 'Alice Johnson',
-	email: 'alice@example.com',
-	role: 'admin',
-	address: {
-		street: '1 Street',
-		city: 'Los Angeles',
-		state: 'CA',
-		zip: '12345',
-		subAddress: {
-			floor: '3',
-			unit: 'B'
-		}
-	}
-}
-
-// 🐨 Use object destructuring to extract `name` and `email` from `user`
-const { name, email, ...restOfUser } = user
-
-// 🐨 Use destructuring with renaming to extract `id` as `userId`
-const { id: userId } = user
-
-// 🐨 Use destructuring with a default value to extract `bio` with a fallback of 'No bio provided'
-const { bio = "No bio provided" } = user
-
-// other examples
-const { 
-	name: name1, 
-	email: email1, 
-	id: userId1, 
-	bio: bio1 = "No bio provided", 
-	address: { 
-		street,
-		city,
-		state,
-		zip,
-		subAddress: {
-			floor,
-			unit
-		}
-	}
-} = user
-
-// 🐨 Create a function `formatUserCard` that uses destructuring in its parameter
-// to extract name, email, and role, then returns a formatted string
-// function formatUserCard(user: User): string {
-// 	const { name, email, role } = user
-// 	return `${name} - ${email} - ${role}`
-// }
 
 // or
 
-function formatUserCard({ name, email, role }: User): string {
-	return `${name} - ${email} - ${role}`
-}
+// Function returning tuple, then destructuring result
+// function getMinMax(nums: Array<number>): readonly [number, number] {
+	
+// 	const sorted = [...nums].sort((a, b) => a - b)
+
+// 	return [sorted[0], sorted[sorted.length - 1]] as const
+// }
+
+const [min, max] = getMinMax(scores)
 
 // Test - uncomment when ready
-console.log(name) // 'Alice Johnson'
-console.log(email) // 'alice@example.com'
+console.log(highest, secondHighest) // 95 92
+console.log(winner, others) // 95 [92, 88, 87, 76]
+console.log(x, y, z) // 10 20 30
+console.log(min, max) // 76 95
 
-console.log(restOfUser) // '{ id: "u123", role: "admin", address: { street: "1 Street", city: "Los Angeles", state: "CA", zip: "12345", subAddress: { floor: "3", unit: "B" } } }'
-
-console.log(userId) // 'u123'
-console.log(bio) // 'No bio provided'
-
-console.log(name1) // 'Alice Johnson'
-console.log(street) // '1 Street'
-console.log(unit) // 'B'
-
-console.log(formatUserCard(user))
-
-// 🐨 Export your variables and functi// 💰 exportcan verify your work
-export { name, email, userId, bio, formatUserCard }
+// 🐨 Export your variables and function so we can verify your work
+export { highest, secondHighest, winner, others, x, y, z, min, max, getMinMax }

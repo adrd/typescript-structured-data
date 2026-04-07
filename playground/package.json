@@ -1,5 +1,5 @@
 {
-  "name": "exercises_04.destructuring_01.problem.object-destructuring",
+  "name": "exercises_04.destructuring_02.problem.array-destructuring",
   "type": "module",
   "scripts": {
     "start": "npx @kentcdodds/log-module@latest ./index.ts",
