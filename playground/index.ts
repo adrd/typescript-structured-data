@@ -1,50 +1,32 @@
-// Reducing Data
-// Accumulating arrays into single values
+// Object Keys and Values
+// Turning object data into arrays
 
-const products = [
-	{ name: 'Laptop', price: 999.99, category: 'Electronics' },
-	{ name: 'Toaster', price: 79.99, category: 'Kitchen' },
-	{ name: 'Headphones', price: 149.99, category: 'Electronics' },
-	{ name: 'Blender', price: 49.99, category: 'Kitchen' },
-	{ name: 'Monitor', price: 299.99, category: 'Electronics' },
-]
+const inventory = {
+	apples: 12,
+	oranges: 8,
+	bananas: 0,
+	mangoes: 4,
+}
 
-// 🐨 Use reduce to sum all prices
-const total: number = products.reduce((acc, product) => (acc + product.price), 0)
+// 🐨 Use Object.keys to get an array of item names
+const itemNames: Array<string> = Object.keys(inventory)
 
-// 🐨 Use reduce to find the most expensive product
-// 💰 You can use the first product as the initial value (products[0])
-const mostExpensive = products.reduce(
-	(max, product) => (product.price > max.price ? product : max), 
-	products[0]
-)
+// 🐨 Use Object.values to get an array of quantities
+const quantities: Array<number> = Object.values(inventory)
 
-// 🐨 Use reduce to count products by category
-// 💰 The accumulator can be an object ({} as Record<string, number>)
-const init: any = {}
-const countByCategory = products.reduce((acc, product) => {
-
-	console.log(acc)
-
-	acc[product.category] = (acc[product.category] || 0) + 1
-
-	return acc
-
-}, init)
+// 🐨 Use the quantities array to compute the total quantity
+const totalQuantity: number = quantities.reduce((total, q) => (total + q), 0)
 
 // or
 
-// const countByCategory: Record<string, number> = products.reduce(
-// 	(acc, p) => ({
-// 		...acc,
-// 		[p.category]: (acc[p.category] || 0) + 1,
-// 	}),
-// 	{} as Record<string, number>,
-// )
+// let totalQuantity: number = 0
+// for (const quantity of Object.values(inventory)) {
+// 	totalQuantity += quantity
+// }
 
-console.log('Total:', total)
-console.log('Most expensive:', mostExpensive.name)
-console.log('By category:', countByCategory)
+console.log('Item names:', itemNames)
+console.log('Quantities:', quantities)
+console.log('Total:', totalQuantity)
 
 // 🐨 Export your variables so we can verify your work
-export { total, mostExpensive, countByCategory }
+export { itemNames, quantities, totalQuantity }

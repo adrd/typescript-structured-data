@@ -1,32 +1,15 @@
-# Reduce
+# Object Keys and Values
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/5-array-methods/reduce" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/6-object-methods/keys-values" />
 
-👨‍💼 The `reduce` method accumulates an array into a single value. It's the most
-powerful (and sometimes confusing) array method—and a cornerstone of functional
-programming.
-
-```ts
-const numbers = [1, 2, 3, 4]
-const sum = numbers.reduce((acc, n) => acc + n, 0)
-// 10
-```
-
-Parameters:
-
-- **accumulator** (`acc`) - The running total
-- **current** (`n`) - The current element
-- **initial value** (`0`) - Starting point
+👨‍💼 We have a small inventory object and need to extract the names and
+quantities for reporting.
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Use `reduce` to sum all prices
-2. Use `reduce` to find the most expensive product
-3. Use `reduce` to count products by category
+1. Use `Object.keys` to get the item names
+2. Use `Object.values` to get the item quantities
+3. Compute the total quantity using the values array
 
-💰 `reduce` combines all items into one accumulated result.
-
-Each iteration returns a new object instead of mutating the accumulator. This
-is the functional approach—easier to reason about and debug.
-
-📜 [MDN - Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)
+- 📜 [MDN - Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+- 📜 [MDN - Object.values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values)
