@@ -1,32 +1,23 @@
-// Object Keys and Values
-// Turning object data into arrays
+// Object Entries and fromEntries
+// Transforming object values with array methods
 
-const inventory = {
-	apples: 12,
-	oranges: 8,
-	bananas: 0,
-	mangoes: 4,
+const priceBySku = {
+	'sku-1': 1299,
+	'sku-2': 499,
+	'sku-3': 2500,
 }
 
-// 🐨 Use Object.keys to get an array of item names
-const itemNames: Array<string> = Object.keys(inventory)
+// 🐨 Use Object.entries to get an array of [sku, price] pairs
+const entries: Array<[string, number]> = Object.entries(priceBySku)
 
-// 🐨 Use Object.values to get an array of quantities
-const quantities: Array<number> = Object.values(inventory)
+// 🐨 Create discounted entries with 10% off (rounded to the nearest whole number)
+const discountedEntries: Array<[string, number]> = entries.map(([sku, price]) => ([sku, Math.round(price * 0.9)]))
 
-// 🐨 Use the quantities array to compute the total quantity
-const totalQuantity: number = quantities.reduce((total, q) => (total + q), 0)
+// 🐨 Use Object.fromEntries to create a discountedPrices object
+const discountedPrices = Object.fromEntries(discountedEntries)
 
-// or
-
-// let totalQuantity: number = 0
-// for (const quantity of Object.values(inventory)) {
-// 	totalQuantity += quantity
-// }
-
-console.log('Item names:', itemNames)
-console.log('Quantities:', quantities)
-console.log('Total:', totalQuantity)
+console.log('Entries:', entries)
+console.log('Discounted:', discountedPrices)
 
 // 🐨 Export your variables so we can verify your work
-export { itemNames, quantities, totalQuantity }
+export { entries, discountedEntries, discountedPrices }

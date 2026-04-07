@@ -1,15 +1,15 @@
-# Object Keys and Values
+# Object Entries and fromEntries
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/6-object-methods/keys-values" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/6-object-methods/entries-from-entries" />
 
-👨‍💼 We have a small inventory object and need to extract the names and
-quantities for reporting.
+👨‍💼 We need to apply a discount to all prices in our catalog and return a new
+object with updated values.
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Use `Object.keys` to get the item names
-2. Use `Object.values` to get the item quantities
-3. Compute the total quantity using the values array
+1. Use `Object.entries` to get the catalog entries
+2. Use `map` to apply a 10% discount to each price
+3. Use `Object.fromEntries` to build the discounted object
 
-- 📜 [MDN - Object.keys](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
-- 📜 [MDN - Object.values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/values)
+- 📜 [MDN - Object.entries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)
+- 📜 [MDN - Object.fromEntries](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/fromEntries)

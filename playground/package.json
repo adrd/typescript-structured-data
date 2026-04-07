@@ -1,5 +1,5 @@
 {
-  "name": "exercises_06.object-methods_01.problem.keys-values",
+  "name": "exercises_06.object-methods_02.problem.entries-from-entries",
   "type": "module",
   "scripts": {
     "start": "npx @kentcdodds/log-module@latest ./index.ts",

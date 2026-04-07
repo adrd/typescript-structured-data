@@ -2,47 +2,47 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('itemNames is exported', () => {
+await test('entries are exported', () => {
 	assert.ok(
-		'itemNames' in solution,
-		'🚨 Make sure you export "itemNames"',
+		'entries' in solution,
+		'🚨 Make sure you export "entries"',
 	)
 })
 
-await test('quantities is exported', () => {
+await test('discountedEntries are exported', () => {
 	assert.ok(
-		'quantities' in solution,
-		'🚨 Make sure you export "quantities"',
+		'discountedEntries' in solution,
+		'🚨 Make sure you export "discountedEntries"',
 	)
 })
 
-await test('totalQuantity is exported', () => {
+await test('discountedPrices are exported', () => {
 	assert.ok(
-		'totalQuantity' in solution,
-		'🚨 Make sure you export "totalQuantity"',
+		'discountedPrices' in solution,
+		'🚨 Make sure you export "discountedPrices"',
 	)
 })
 
-await test('itemNames uses Object.keys order', () => {
+await test('entries should contain sku/price pairs', () => {
 	assert.deepStrictEqual(
-		solution.itemNames,
-		['apples', 'oranges', 'bananas', 'mangoes'],
-		'🚨 itemNames should list the inventory keys in order',
+		solution.entries,
+		[
+			['sku-1', 1299],
+			['sku-2', 499],
+			['sku-3', 2500],
+		],
+		'🚨 entries should match Object.entries(priceBySku)',
 	)
 })
 
-await test('quantities uses Object.values order', () => {
+await test('discountedPrices should apply 10% discount', () => {
 	assert.deepStrictEqual(
-		solution.quantities,
-		[12, 8, 0, 4],
-		'🚨 quantities should list the inventory values in order',
-	)
-})
-
-await test('totalQuantity sums all values', () => {
-	assert.strictEqual(
-		solution.totalQuantity,
-		24,
-		'🚨 totalQuantity should sum all quantities',
+		solution.discountedPrices,
+		{
+			'sku-1': 1169,
+			'sku-2': 449,
+			'sku-3': 2250,
+		},
+		'🚨 discountedPrices should contain 10% off values',
 	)
 })
