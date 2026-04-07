@@ -1,23 +1,30 @@
-// Object Entries and fromEntries
-// Transforming object values with array methods
+// Map Lookups
+// Fast access by key
 
-const priceBySku = {
-	'sku-1': 1299,
-	'sku-2': 499,
-	'sku-3': 2500,
+type User = {
+	id: string
+	name: string
+	role: 'admin' | 'member'
 }
 
-// 🐨 Use Object.entries to get an array of [sku, price] pairs
-const entries: Array<[string, number]> = Object.entries(priceBySku)
+const users: Array<User> = [
+	{ id: 'u1', name: 'Ava', role: 'admin' },
+	{ id: 'u2', name: 'Ben', role: 'member' },
+	{ id: 'u3', name: 'Chris', role: 'member' },
+]
 
-// 🐨 Create discounted entries with 10% off (rounded to the nearest whole number)
-const discountedEntries: Array<[string, number]> = entries.map(([sku, price]) => ([sku, Math.round(price * 0.9)]))
+// 🐨 Create a Map of users keyed by id
+const usersByIdArray: Array<[string, User]> = users.map(user => [user.id , user])
+const usersById = new Map<string, User>(usersByIdArray)
 
-// 🐨 Use Object.fromEntries to create a discountedPrices object
-const discountedPrices = Object.fromEntries(discountedEntries)
+// 🐨 Read the admin user (id "u1") from the map
+const adminUser = usersById.get("u1")
 
-console.log('Entries:', entries)
-console.log('Discounted:', discountedPrices)
+// 🐨 Check whether the map has a user with id "u99"
+const hasMissingUser = usersById.has("u99")
+
+console.log('Admin user:', adminUser)
+console.log('Has missing user:', hasMissingUser)
 
 // 🐨 Export your variables so we can verify your work
-export { entries, discountedEntries, discountedPrices }
+export { usersById, adminUser, hasMissingUser }
