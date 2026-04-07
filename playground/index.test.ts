@@ -2,57 +2,76 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('names is exported', () => {
+await test('electronics is exported', () => {
 	assert.ok(
-		'names' in solution,
-		'🚨 Make sure you export "names" - add: export { names, ... }',
+		'electronics' in solution,
+		'🚨 Make sure you export "electronics" - add: export { electronics, ... }',
 	)
 })
 
-await test('prices is exported', () => {
+await test('affordable is exported', () => {
 	assert.ok(
-		'prices' in solution,
-		'🚨 Make sure you export "prices" - add: export { prices, ... }',
+		'affordable' in solution,
+		'🚨 Make sure you export "affordable" - add: export { affordable, ... }',
 	)
 })
 
-await test('summary is exported', () => {
+await test('available is exported', () => {
 	assert.ok(
-		'summary' in solution,
-		'🚨 Make sure you export "summary" - add: export { summary, ... }',
+		'available' in solution,
+		'🚨 Make sure you export "available" - add: export { available, ... }',
 	)
 })
 
-await test('Map should extract product names correctly', () => {
-	assert.deepStrictEqual(
-		solution.names,
-		['Laptop', 'Toaster', 'Headphones', 'Blender'],
-		'🚨 names should be ["Laptop", "Toaster", "Headphones", "Blender"] - use map() to extract the name property from each product',
+await test('inStockElectronicsUnder500 is exported', () => {
+	assert.ok(
+		'inStockElectronicsUnder500' in solution,
+		'🚨 Make sure you export "inStockElectronicsUnder500" - add: export { inStockElectronicsUnder500, ... }',
 	)
+})
+
+await test('Filter should filter electronics correctly', () => {
 	assert.strictEqual(
-		solution.names.length,
+		solution.electronics.length,
+		3,
+		'🚨 electronics.length should be 3 - use filter() to keep only products where category === "Electronics"',
+	)
+	assert.deepStrictEqual(
+		solution.electronics.map((p) => p.name),
+		['Laptop', 'Headphones', 'Monitor'],
+		'🚨 electronics should contain ["Laptop", "Headphones", "Monitor"] - filter products by category property',
+	)
+})
+
+await test('Filter should filter affordable products correctly', () => {
+	assert.strictEqual(
+		solution.affordable.length,
+		2,
+		'🚨 affordable.length should be 2 - use filter() to keep only products where price < 100',
+	)
+	assert.deepStrictEqual(
+		solution.affordable.map((p) => p.name),
+		['Toaster', 'Blender'],
+		'🚨 affordable should contain ["Toaster", "Blender"] - filter products by price comparison',
+	)
+})
+
+await test('Filter should filter in-stock products correctly', () => {
+	assert.strictEqual(
+		solution.available.length,
 		4,
-		'🚨 names.length should be 4 - map() returns an array with the same length as the original',
+		'🚨 available.length should be 4 - use filter() to keep only products where inStock === true',
+	)
+	assert.ok(
+		solution.available.every((p) => p.inStock),
+		'🚨 All available products should have inStock === true - verify your filter condition checks the inStock property',
 	)
 })
 
-await test('Map should format prices correctly', () => {
+await test('Chained filters should work correctly', () => {
 	assert.deepStrictEqual(
-		solution.prices,
-		['$999.99', '$79.99', '$149.99', '$49.99'],
-		'🚨 prices should be ["$999.99", "$79.99", "$149.99", "$49.99"] - use map() to format each price with a dollar sign and toFixed(2)',
-	)
-})
-
-await test('Map should create summary objects correctly', () => {
-	assert.deepStrictEqual(
-		solution.summary,
-		[
-			{ name: 'Laptop', priceLabel: '$999.99' },
-			{ name: 'Toaster', priceLabel: '$79.99' },
-			{ name: 'Headphones', priceLabel: '$149.99' },
-			{ name: 'Blender', priceLabel: '$49.99' },
-		],
-		'🚨 summary should contain objects with name and priceLabel - use map() to transform each product into a new object shape',
+		solution.inStockElectronicsUnder500,
+		['Monitor'],
+		'🚨 inStockElectronicsUnder500 should be ["Monitor"] - chain multiple filters: inStock, then category === "Electronics", then price < 500',
 	)
 })

@@ -1,23 +1,24 @@
-# Map
+# Filter
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/5-array-methods/map" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/5-array-methods/filter" />
 
-👨‍💼 The `map` method creates a new array by transforming each element.
+👨‍💼 The `filter` method creates a new array with only elements that pass a
+test.
 
 ```ts
-const numbers = [1, 2, 3]
-const doubled = numbers.map((n) => n * 2)
-// [2, 4, 6]
+const numbers = [1, 2, 3, 4, 5]
+const evens = numbers.filter((n) => n % 2 === 0)
+// [2, 4]
 ```
 
-The callback receives each element and returns the transformed value.
+The callback returns `true` to keep the element or `false` to exclude it.
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Use `map` to extract product names from an array of products
-2. Use `map` to create formatted price strings
-3. Use `map` to transform products into a different shape
+1. Filter products by category
+2. Filter products by price range
+3. Chain `filter` with `map`
 
-💰 `map` returns a new array of whatever your callback returns.
+💰 `filter` keeps items where your callback returns true.
 
-📜 [MDN - Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+📜 [MDN - Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
