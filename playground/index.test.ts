@@ -2,117 +2,57 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('highest is exported', () => {
+await test('names is exported', () => {
 	assert.ok(
-		'highest' in solution,
-		'🚨 Make sure you export "highest" - add: export { highest, ... }',
+		'names' in solution,
+		'🚨 Make sure you export "names" - add: export { names, ... }',
 	)
 })
 
-await test('secondHighest is exported', () => {
+await test('prices is exported', () => {
 	assert.ok(
-		'secondHighest' in solution,
-		'🚨 Make sure you export "secondHighest" - add: export { secondHighest, ... }',
+		'prices' in solution,
+		'🚨 Make sure you export "prices" - add: export { prices, ... }',
 	)
 })
 
-await test('winner is exported', () => {
+await test('summary is exported', () => {
 	assert.ok(
-		'winner' in solution,
-		'🚨 Make sure you export "winner" - add: export { winner, ... }',
+		'summary' in solution,
+		'🚨 Make sure you export "summary" - add: export { summary, ... }',
 	)
 })
 
-await test('others is exported', () => {
-	assert.ok(
-		'others' in solution,
-		'🚨 Make sure you export "others" - add: export { others, ... }',
-	)
-})
-
-await test('x, y, z are exported', () => {
-	assert.ok('x' in solution, '🚨 Make sure you export "x"')
-	assert.ok('y' in solution, '🚨 Make sure you export "y"')
-	assert.ok('z' in solution, '🚨 Make sure you export "z"')
-})
-
-await test('min and max are exported', () => {
-	assert.ok('min' in solution, '🚨 Make sure you export "min"')
-	assert.ok('max' in solution, '🚨 Make sure you export "max"')
-})
-
-await test('getMinMax is exported', () => {
-	assert.ok(
-		'getMinMax' in solution,
-		'🚨 Make sure you export "getMinMax" - add: export { getMinMax, ... }',
-	)
-})
-
-await test('highest and secondHighest should be destructured', () => {
-	assert.strictEqual(
-		solution.highest,
-		95,
-		'🚨 highest should be 95 - destructure first element from scores',
-	)
-	assert.strictEqual(
-		solution.secondHighest,
-		92,
-		'🚨 secondHighest should be 92 - destructure second element from scores',
-	)
-})
-
-await test('winner and others should use rest pattern', () => {
-	assert.strictEqual(
-		solution.winner,
-		95,
-		'🚨 winner should be 95 - use const [winner, ...others] = scores',
-	)
+await test('Map should extract product names correctly', () => {
 	assert.deepStrictEqual(
-		solution.others,
-		[92, 88, 87, 76],
-		'🚨 others should be [92, 88, 87, 76] - use rest pattern',
+		solution.names,
+		['Laptop', 'Toaster', 'Headphones', 'Blender'],
+		'🚨 names should be ["Laptop", "Toaster", "Headphones", "Blender"] - use map() to extract the name property from each product',
+	)
+	assert.strictEqual(
+		solution.names.length,
+		4,
+		'🚨 names.length should be 4 - map() returns an array with the same length as the original',
 	)
 })
 
-await test('coordinates should be destructured into x, y, z', () => {
-	assert.strictEqual(
-		solution.x,
-		10,
-		'🚨 x should be 10 - destructure from coordinates',
-	)
-	assert.strictEqual(
-		solution.y,
-		20,
-		'🚨 y should be 20 - destructure from coordinates',
-	)
-	assert.strictEqual(
-		solution.z,
-		30,
-		'🚨 z should be 30 - destructure from coordinates',
+await test('Map should format prices correctly', () => {
+	assert.deepStrictEqual(
+		solution.prices,
+		['$999.99', '$79.99', '$149.99', '$49.99'],
+		'🚨 prices should be ["$999.99", "$79.99", "$149.99", "$49.99"] - use map() to format each price with a dollar sign and toFixed(2)',
 	)
 })
 
-await test('getMinMax should return tuple and be destructured', () => {
-	assert.strictEqual(
-		solution.min,
-		76,
-		'🚨 min should be 76 - destructure getMinMax result',
-	)
-	assert.strictEqual(
-		solution.max,
-		95,
-		'🚨 max should be 95 - destructure getMinMax result',
-	)
-
-	const [testMin, testMax] = solution.getMinMax([5, 2, 8, 1, 9])
-	assert.strictEqual(
-		testMin,
-		1,
-		'🚨 getMinMax([5,2,8,1,9]) should return min 1',
-	)
-	assert.strictEqual(
-		testMax,
-		9,
-		'🚨 getMinMax([5,2,8,1,9]) should return max 9',
+await test('Map should create summary objects correctly', () => {
+	assert.deepStrictEqual(
+		solution.summary,
+		[
+			{ name: 'Laptop', priceLabel: '$999.99' },
+			{ name: 'Toaster', priceLabel: '$79.99' },
+			{ name: 'Headphones', priceLabel: '$149.99' },
+			{ name: 'Blender', priceLabel: '$49.99' },
+		],
+		'🚨 summary should contain objects with name and priceLabel - use map() to transform each product into a new object shape',
 	)
 })

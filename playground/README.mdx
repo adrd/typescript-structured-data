@@ -1,52 +1,23 @@
-# Array Destructuring
+# Map
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/4-destructuring/array-destructuring" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/5-array-methods/map" />
 
-👨‍💼 Array destructuring extracts elements by position. It's especially useful for
-working with function return values and APIs that return arrays.
-
-```ts
-const colors = ['red', 'green', 'blue']
-const [first, second, third] = colors
-// first = 'red', second = 'green', third = 'blue'
-```
-
-## Skipping Elements
-
-Use empty slots to skip elements you don't need:
+👨‍💼 The `map` method creates a new array by transforming each element.
 
 ```ts
-const [, , third] = colors // third = 'blue'
+const numbers = [1, 2, 3]
+const doubled = numbers.map((n) => n * 2)
+// [2, 4, 6]
 ```
 
-## Rest Pattern
-
-Collect remaining elements into a new array:
-
-```ts
-const [head, ...rest] = [1, 2, 3, 4, 5]
-// head = 1, rest = [2, 3, 4, 5]
-```
-
-<callout-info>
-	The spread/rest syntax was covered in Exercise 3. The `...rest` pattern here
-	collects remaining array elements into a new array.
-</callout-info>
-
-## Swapping Variables
-
-Destructuring enables elegant swaps:
-
-```ts
-let a = 1
-let b = 2
-;[a, b] = [b, a] // a = 2, b = 1
-```
+The callback receives each element and returns the transformed value.
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Destructure the first and second elements from an array
-2. Use the rest pattern to separate the first item from the rest
-3. Create a function that returns multiple values and destructure the result
+1. Use `map` to extract product names from an array of products
+2. Use `map` to create formatted price strings
+3. Use `map` to transform products into a different shape
 
-📜 [MDN - Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment#array_destructuring)
+💰 `map` returns a new array of whatever your callback returns.
+
+📜 [MDN - Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
