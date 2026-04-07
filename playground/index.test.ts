@@ -2,76 +2,57 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('electronics is exported', () => {
+await test('total is exported', () => {
 	assert.ok(
-		'electronics' in solution,
-		'🚨 Make sure you export "electronics" - add: export { electronics, ... }',
+		'total' in solution,
+		'🚨 Make sure you export "total" - add: export { total, ... }',
 	)
 })
 
-await test('affordable is exported', () => {
+await test('mostExpensive is exported', () => {
 	assert.ok(
-		'affordable' in solution,
-		'🚨 Make sure you export "affordable" - add: export { affordable, ... }',
+		'mostExpensive' in solution,
+		'🚨 Make sure you export "mostExpensive" - add: export { mostExpensive, ... }',
 	)
 })
 
-await test('available is exported', () => {
+await test('countByCategory is exported', () => {
 	assert.ok(
-		'available' in solution,
-		'🚨 Make sure you export "available" - add: export { available, ... }',
+		'countByCategory' in solution,
+		'🚨 Make sure you export "countByCategory" - add: export { countByCategory, ... }',
 	)
 })
 
-await test('inStockElectronicsUnder500 is exported', () => {
-	assert.ok(
-		'inStockElectronicsUnder500' in solution,
-		'🚨 Make sure you export "inStockElectronicsUnder500" - add: export { inStockElectronicsUnder500, ... }',
-	)
-})
-
-await test('Filter should filter electronics correctly', () => {
+await test('Reduce should calculate total price correctly', () => {
 	assert.strictEqual(
-		solution.electronics.length,
+		solution.total,
+		1579.95,
+		'🚨 total should be 1579.95 - use reduce() to sum all product prices, starting with initial value 0',
+	)
+})
+
+await test('Reduce should find most expensive product correctly', () => {
+	assert.strictEqual(
+		solution.mostExpensive.name,
+		'Laptop',
+		'🚨 mostExpensive.name should be "Laptop" - use reduce() to find the product with the highest price',
+	)
+	assert.strictEqual(
+		solution.mostExpensive.price,
+		999.99,
+		'🚨 mostExpensive.price should be 999.99 - compare prices in the reduce accumulator to find the maximum',
+	)
+})
+
+await test('Reduce should count products by category correctly', () => {
+	assert.strictEqual(
+		solution.countByCategory['Electronics'],
 		3,
-		'🚨 electronics.length should be 3 - use filter() to keep only products where category === "Electronics"',
+		'🚨 countByCategory["Electronics"] should be 3 - use reduce() to count products by category, incrementing the count for each category',
 	)
-	assert.deepStrictEqual(
-		solution.electronics.map((p) => p.name),
-		['Laptop', 'Headphones', 'Monitor'],
-		'🚨 electronics should contain ["Laptop", "Headphones", "Monitor"] - filter products by category property',
-	)
-})
-
-await test('Filter should filter affordable products correctly', () => {
 	assert.strictEqual(
-		solution.affordable.length,
+		solution.countByCategory['Kitchen'],
 		2,
-		'🚨 affordable.length should be 2 - use filter() to keep only products where price < 100',
-	)
-	assert.deepStrictEqual(
-		solution.affordable.map((p) => p.name),
-		['Toaster', 'Blender'],
-		'🚨 affordable should contain ["Toaster", "Blender"] - filter products by price comparison',
-	)
-})
-
-await test('Filter should filter in-stock products correctly', () => {
-	assert.strictEqual(
-		solution.available.length,
-		4,
-		'🚨 available.length should be 4 - use filter() to keep only products where inStock === true',
-	)
-	assert.ok(
-		solution.available.every((p) => p.inStock),
-		'🚨 All available products should have inStock === true - verify your filter condition checks the inStock property',
-	)
-})
-
-await test('Chained filters should work correctly', () => {
-	assert.deepStrictEqual(
-		solution.inStockElectronicsUnder500,
-		['Monitor'],
-		'🚨 inStockElectronicsUnder500 should be ["Monitor"] - chain multiple filters: inStock, then category === "Electronics", then price < 500',
+		'🚨 countByCategory["Kitchen"] should be 2 - accumulate counts in an object using reduce()',
 	)
 })

@@ -1,24 +1,32 @@
-# Filter
+# Reduce
 
-<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/5-array-methods/filter" />
+<EpicVideo url="https://www.epicweb.dev/tutorials/structured-data/5-array-methods/reduce" />
 
-👨‍💼 The `filter` method creates a new array with only elements that pass a
-test.
+👨‍💼 The `reduce` method accumulates an array into a single value. It's the most
+powerful (and sometimes confusing) array method—and a cornerstone of functional
+programming.
 
 ```ts
-const numbers = [1, 2, 3, 4, 5]
-const evens = numbers.filter((n) => n % 2 === 0)
-// [2, 4]
+const numbers = [1, 2, 3, 4]
+const sum = numbers.reduce((acc, n) => acc + n, 0)
+// 10
 ```
 
-The callback returns `true` to keep the element or `false` to exclude it.
+Parameters:
+
+- **accumulator** (`acc`) - The running total
+- **current** (`n`) - The current element
+- **initial value** (`0`) - Starting point
 
 🐨 Open <InlineFile file="index.ts" /> and:
 
-1. Filter products by category
-2. Filter products by price range
-3. Chain `filter` with `map`
+1. Use `reduce` to sum all prices
+2. Use `reduce` to find the most expensive product
+3. Use `reduce` to count products by category
 
-💰 `filter` keeps items where your callback returns true.
+💰 `reduce` combines all items into one accumulated result.
 
-📜 [MDN - Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+Each iteration returns a new object instead of mutating the accumulator. This
+is the functional approach—easier to reason about and debug.
+
+📜 [MDN - Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)

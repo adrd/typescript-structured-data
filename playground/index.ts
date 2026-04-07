@@ -1,38 +1,50 @@
-// Filtering Data
-// Selecting elements that match criteria
+// Reducing Data
+// Accumulating arrays into single values
 
 const products = [
-	{ name: 'Laptop', price: 999.99, category: 'Electronics', inStock: true },
-	{ name: 'Toaster', price: 79.99, category: 'Kitchen', inStock: true },
-	{
-		name: 'Headphones',
-		price: 149.99,
-		category: 'Electronics',
-		inStock: false,
-	},
-	{ name: 'Blender', price: 49.99, category: 'Kitchen', inStock: true },
-	{ name: 'Monitor', price: 299.99, category: 'Electronics', inStock: true },
+	{ name: 'Laptop', price: 999.99, category: 'Electronics' },
+	{ name: 'Toaster', price: 79.99, category: 'Kitchen' },
+	{ name: 'Headphones', price: 149.99, category: 'Electronics' },
+	{ name: 'Blender', price: 49.99, category: 'Kitchen' },
+	{ name: 'Monitor', price: 299.99, category: 'Electronics' },
 ]
 
-// 🐨 Filter to get only Electronics products
-const electronics = products.filter(p => p.category === 'Electronics')
+// 🐨 Use reduce to sum all prices
+const total: number = products.reduce((acc, product) => (acc + product.price), 0)
 
-// 🐨 Filter to get products under $100
-const affordable = products.filter(p => p.price < 100)
+// 🐨 Use reduce to find the most expensive product
+// 💰 You can use the first product as the initial value (products[0])
+const mostExpensive = products.reduce(
+	(max, product) => (product.price > max.price ? product : max), 
+	products[0]
+)
 
-// 🐨 Filter to get products that are in stock
-const available = products.filter(p => p.inStock)
+// 🐨 Use reduce to count products by category
+// 💰 The accumulator can be an object ({} as Record<string, number>)
+const init: any = {}
+const countByCategory = products.reduce((acc, product) => {
 
-// 🐨 Chain: get names of in-stock Electronics under $500
-// 💰 Chain filters, then map to names
-const inStockElectronicsUnder500 = products
-	.filter(p => p.inStock && p.category === 'Electronics' && p.price < 500)
-	.map(p => p.name)
+	console.log(acc)
 
-console.log('Electronics:', electronics.map(p => p.name))
-console.log('Affordable:', affordable.map(p => p.name))
-console.log('In Stock:', available.map(p => p.name))
-console.log('In-stock Electronics under $500:', inStockElectronicsUnder500)
+	acc[product.category] = (acc[product.category] || 0) + 1
+
+	return acc
+
+}, init)
+
+// or
+
+// const countByCategory: Record<string, number> = products.reduce(
+// 	(acc, p) => ({
+// 		...acc,
+// 		[p.category]: (acc[p.category] || 0) + 1,
+// 	}),
+// 	{} as Record<string, number>,
+// )
+
+console.log('Total:', total)
+console.log('Most expensive:', mostExpensive.name)
+console.log('By category:', countByCategory)
 
 // 🐨 Export your variables so we can verify your work
-export { electronics, affordable, available, inStockElectronicsUnder500 }
+export { total, mostExpensive, countByCategory }
