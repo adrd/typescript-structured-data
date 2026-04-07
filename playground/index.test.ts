@@ -2,51 +2,48 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('usersById is exported', () => {
+await test('uniqueTags is exported', () => {
 	assert.ok(
-		'usersById' in solution,
-		'🚨 Make sure you export "usersById"',
+		'uniqueTags' in solution,
+		'🚨 Make sure you export "uniqueTags"',
 	)
 })
 
-await test('adminUser is exported', () => {
+await test('hasTypeScript is exported', () => {
 	assert.ok(
-		'adminUser' in solution,
-		'🚨 Make sure you export "adminUser"',
+		'hasTypeScript' in solution,
+		'🚨 Make sure you export "hasTypeScript"',
 	)
 })
 
-await test('hasMissingUser is exported', () => {
-	assert.ok(
-		'hasMissingUser' in solution,
-		'🚨 Make sure you export "hasMissingUser"',
-	)
+await test('tagList is exported', () => {
+	assert.ok('tagList' in solution, '🚨 Make sure you export "tagList"')
 })
 
-await test('usersById should be a Map with 3 entries', () => {
+await test('uniqueTags should be a Set with unique values', () => {
 	assert.ok(
-		solution.usersById instanceof Map,
-		'🚨 usersById should be a Map',
+		solution.uniqueTags instanceof Set,
+		'🚨 uniqueTags should be a Set',
 	)
 	assert.strictEqual(
-		solution.usersById.size,
-		3,
-		'🚨 usersById should contain all users',
+		solution.uniqueTags.size,
+		4,
+		'🚨 uniqueTags should contain 4 unique values',
 	)
 })
 
-await test('adminUser should come from the map', () => {
+await test('hasTypeScript should be true', () => {
 	assert.strictEqual(
-		solution.adminUser?.name,
-		'Ava',
-		'🚨 adminUser should be the user with id "u1"',
+		solution.hasTypeScript,
+		true,
+		'🚨 hasTypeScript should be true for "typescript"',
 	)
 })
 
-await test('hasMissingUser should be false for u99', () => {
-	assert.strictEqual(
-		solution.hasMissingUser,
-		false,
-		'🚨 hasMissingUser should be false for id "u99"',
+await test('tagList should contain the unique tags', () => {
+	assert.deepStrictEqual(
+		solution.tagList,
+		['typescript', 'data', 'arrays', 'objects'],
+		'🚨 tagList should contain unique tags in insertion order',
 	)
 })

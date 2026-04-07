@@ -1,30 +1,30 @@
-// Map Lookups
-// Fast access by key
+// Unique Values with Set
+// Removing duplicates
 
-type User = {
-	id: string
-	name: string
-	role: 'admin' | 'member'
-}
-
-const users: Array<User> = [
-	{ id: 'u1', name: 'Ava', role: 'admin' },
-	{ id: 'u2', name: 'Ben', role: 'member' },
-	{ id: 'u3', name: 'Chris', role: 'member' },
+const tags = [
+	'typescript',
+	'data',
+	'typescript',
+	'arrays',
+	'data',
+	'objects',
 ]
 
-// 🐨 Create a Map of users keyed by id
-const usersByIdArray: Array<[string, User]> = users.map(user => [user.id , user])
-const usersById = new Map<string, User>(usersByIdArray)
+// 🐨 Create a Set of unique tags
+const uniqueTags: Set<string> = new Set(tags)
 
-// 🐨 Read the admin user (id "u1") from the map
-const adminUser = usersById.get("u1")
+// 🐨 Check whether the set has the "typescript" tag
+const hasTypeScript: boolean = uniqueTags.has("typescript")
 
-// 🐨 Check whether the map has a user with id "u99"
-const hasMissingUser = usersById.has("u99")
+// 🐨 Convert the set back into an array
+const tagList: Array<string> = [...uniqueTags]
 
-console.log('Admin user:', adminUser)
-console.log('Has missing user:', hasMissingUser)
+// or
+
+// const tagList: Array<string> = Array.from(uniqueTags)
+
+console.log('Unique tags:', tagList)
+console.log('Has TypeScript:', hasTypeScript)
 
 // 🐨 Export your variables so we can verify your work
-export { usersById, adminUser, hasMissingUser }
+export { uniqueTags, hasTypeScript, tagList }
