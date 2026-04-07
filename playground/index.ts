@@ -1,86 +1,95 @@
-// Rest Parameters
-// Functions that accept variable numbers of arguments
+// Object Destructuring
+// Extracting values from objects into variables
 
-// 🐨 Create a function `multiply` that:
-// - Uses rest parameters to accept any number of numbers
-// - Returns the product of all numbers (multiply them together)
-// - Returns 1 if no arguments are provided
-function multiply(...numbers: Array<number>): number {
-	let product = 1
-
-	for (const number of numbers) {
-		product = product * number
+type User = {
+	id: string
+	name: string
+	email: string
+	role: 'admin' | 'user'
+	bio?: string,
+	address: {
+		street: string,
+		city: string,
+		state: string,
+		zip: string,
+		subAddress: {
+			floor: string,
+			unit: string
+		}
 	}
-
-	return product
 }
+
+const user: User = {
+	id: 'u123',
+	name: 'Alice Johnson',
+	email: 'alice@example.com',
+	role: 'admin',
+	address: {
+		street: '1 Street',
+		city: 'Los Angeles',
+		state: 'CA',
+		zip: '12345',
+		subAddress: {
+			floor: '3',
+			unit: 'B'
+		}
+	}
+}
+
+// 🐨 Use object destructuring to extract `name` and `email` from `user`
+const { name, email, ...restOfUser } = user
+
+// 🐨 Use destructuring with renaming to extract `id` as `userId`
+const { id: userId } = user
+
+// 🐨 Use destructuring with a default value to extract `bio` with a fallback of 'No bio provided'
+const { bio = "No bio provided" } = user
+
+// other examples
+const { 
+	name: name1, 
+	email: email1, 
+	id: userId1, 
+	bio: bio1 = "No bio provided", 
+	address: { 
+		street,
+		city,
+		state,
+		zip,
+		subAddress: {
+			floor,
+			unit
+		}
+	}
+} = user
+
+// 🐨 Create a function `formatUserCard` that uses destructuring in its parameter
+// to extract name, email, and role, then returns a formatted string
+// function formatUserCard(user: User): string {
+// 	const { name, email, role } = user
+// 	return `${name} - ${email} - ${role}`
+// }
 
 // or
 
-// function multiply(...numbers: Array<number>): number {
-// 	if (numbers.length === 0) 
-// 		return 1
-
-// 	return numbers.reduce((a, b) => a * b, 1)
-// }
-
-// 🐨 Create a function `logWithPrefix` that:
-// - Takes a prefix string as the first parameter
-// - Uses rest for remaining messages
-// - Logs each message with the prefix
-function logWithPrefix(prefix: string, ...messages: Array<string>): void {
-
-	for (const message of messages) {
-		console.log(`${prefix} ${message}`)
-	}
-
-}
-
-// 🐨 Create a function `sum` that:
-// - Uses rest parameters to collect numbers
-// - Returns the sum of all numbers
-// - Returns 0 if no arguments are provided
-function sum(...numbers: Array<number>): number {
-	let total = 0
-
-	if (numbers.length === 0)
-		return total
-
-	for (const number of numbers) {
-		total += number
-	}
-
-	return total
-}
-
-// or
-
-// function sum(...numbers: Array<number>): number {
-// 	return numbers.reduce((a, b) => a + b, 0)
-// }
-
-// 🐨 Create a function `mergeArrays` that:
-// - Takes rest parameters of number arrays
-// - Returns a single merged array using spread inside
-function mergeArrays(...arrays: Array<Array<number>>): Array<number> {
-	
-	const result: Array<number> = []
-	
-	for (const array of arrays) {
-		result.push(...array)
-	}
-
-	return result
-
+function formatUserCard({ name, email, role }: User): string {
+	return `${name} - ${email} - ${role}`
 }
 
 // Test - uncomment when ready
-console.log(multiply(2, 3, 4)) // 24
-console.log(multiply(5)) // 5
-console.log(multiply()) // 1
-logWithPrefix('[INFO]', 'Starting', 'Processing', 'Done')
-console.log(sum(1, 2, 3, 4)) // 10
-console.log(mergeArrays([1, 2], [3, 4], [5])) // [1, 2, 3, 4, 5]
+console.log(name) // 'Alice Johnson'
+console.log(email) // 'alice@example.com'
 
-// 🐨 Export your functions so we can verify your work
-export { multiply, sum, mergeArrays }
+console.log(restOfUser) // '{ id: "u123", role: "admin", address: { street: "1 Street", city: "Los Angeles", state: "CA", zip: "12345", subAddress: { floor: "3", unit: "B" } } }'
+
+console.log(userId) // 'u123'
+console.log(bio) // 'No bio provided'
+
+console.log(name1) // 'Alice Johnson'
+console.log(street) // '1 Street'
+console.log(unit) // 'B'
+
+console.log(formatUserCard(user))
+
+// 🐨 Export your variables and functi// 💰 exportcan verify your work
+export { name, email, userId, bio, formatUserCard }

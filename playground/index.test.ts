@@ -2,70 +2,85 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import * as solution from './index.ts'
 
-await test('multiply is exported', () => {
+await test('name is exported', () => {
 	assert.ok(
-		'multiply' in solution,
-		'🚨 Make sure you export "multiply" - add: export { multiply, ... }',
+		'name' in solution,
+		'🚨 Make sure you export "name" - add: export { name, ... }',
 	)
 })
 
-await test('sum is exported', () => {
+await test('email is exported', () => {
 	assert.ok(
-		'sum' in solution,
-		'🚨 Make sure you export "sum" - add: export { sum, ... }',
+		'email' in solution,
+		'🚨 Make sure you export "email" - add: export { email, ... }',
 	)
 })
 
-await test('mergeArrays is exported', () => {
+await test('userId is exported', () => {
 	assert.ok(
-		'mergeArrays' in solution,
-		'🚨 Make sure you export "mergeArrays" - add: export { mergeArrays, ... }',
+		'userId' in solution,
+		'🚨 Make sure you export "userId" - add: export { userId, ... }',
 	)
 })
 
-await test('multiply should use rest parameters', () => {
-	assert.strictEqual(
-		solution.multiply(2, 3, 4),
-		24,
-		'🚨 multiply(2, 3, 4) should return 24',
-	)
-	assert.strictEqual(solution.multiply(5), 5, '🚨 multiply(5) should return 5')
-	assert.strictEqual(
-		solution.multiply(),
-		1,
-		'🚨 multiply() with no args should return 1',
-	)
-	assert.strictEqual(
-		solution.multiply(2, 2, 2, 2),
-		16,
-		'🚨 multiply(2, 2, 2, 2) should return 16',
+await test('bio is exported', () => {
+	assert.ok(
+		'bio' in solution,
+		'🚨 Make sure you export "bio" - add: export { bio, ... }',
 	)
 })
 
-await test('sum should add all numbers', () => {
-	assert.strictEqual(
-		solution.sum(1, 2, 3, 4),
-		10,
-		'🚨 sum(1, 2, 3, 4) should return 10',
+await test('formatUserCard is exported', () => {
+	assert.ok(
+		'formatUserCard' in solution,
+		'🚨 Make sure you export "formatUserCard" - add: export { formatUserCard, ... }',
 	)
-	assert.strictEqual(solution.sum(5), 5, '🚨 sum(5) should return 5')
-	assert.strictEqual(solution.sum(), 0, '🚨 sum() with no args should return 0')
 })
 
-await test('mergeArrays should merge multiple arrays', () => {
-	assert.deepStrictEqual(
-		solution.mergeArrays([1, 2], [3, 4], [5]),
-		[1, 2, 3, 4, 5],
-		'🚨 mergeArrays([1, 2], [3, 4], [5]) should return [1, 2, 3, 4, 5]',
+await test('name should be destructured from user', () => {
+	assert.strictEqual(
+		solution.name,
+		'Alice Johnson',
+		'🚨 name should be "Alice Johnson" - use const { name } = user',
 	)
-	assert.deepStrictEqual(
-		solution.mergeArrays([10], [20, 30]),
-		[10, 20, 30],
-		'🚨 mergeArrays([10], [20, 30]) should return [10, 20, 30]',
+})
+
+await test('email should be destructured from user', () => {
+	assert.strictEqual(
+		solution.email,
+		'alice@example.com',
+		'🚨 email should be "alice@example.com" - use const { email } = user',
 	)
-	assert.deepStrictEqual(
-		solution.mergeArrays(),
-		[],
-		'🚨 mergeArrays() should return []',
+})
+
+await test('userId should be renamed from id', () => {
+	assert.strictEqual(
+		solution.userId,
+		'u123',
+		'🚨 userId should be "u123" - use const { id: userId } = user',
+	)
+})
+
+await test('bio should have a default value', () => {
+	assert.strictEqual(
+		solution.bio,
+		'No bio provided',
+		'🚨 bio should be "No bio provided" - use const { bio = "No bio provided" } = user',
+	)
+})
+
+await test('formatUserCard should use parameter destructuring', () => {
+	const result = solution.formatUserCard({
+		id: 'test',
+		name: 'Bob',
+		email: 'bob@test.com',
+		role: 'user',
+	})
+	assert.ok(
+		typeof result === 'string' &&
+			result.includes('Bob') &&
+			result.includes('user') &&
+			result.includes('bob@test.com'),
+		'🚨 formatUserCard should return a string containing the name, role, and email',
 	)
 })
